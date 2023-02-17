@@ -21,10 +21,25 @@ const scene = new THREE.Scene();
 /**
  * Objects
  */
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+//const geometry = new THREE.BoxGeometry(1, 1, 1);
+
+const geometry = new THREE.BufferGeometry();
+
+const count = 50;
+const positionArray = new Float32Array(count * 3 * 3);
+
+for (let i = 0; i < count * 3 * 3; i++) {
+    positionArray[i] = (Math.random() - 0.5) * 4;
+}
+const positionAttribute = new THREE.BufferAttribute(positionArray, 3);
+
+geometry.setAttribute("position", positionAttribute);
+
+const material = new THREE.MeshBasicMaterial({
+    color: 0xff0000,
+    wireframe: true,
+});
 const mesh = new THREE.Mesh(geometry, material);
-mesh.position.set(0.7, -0.6, 1);
 scene.add(mesh);
 
 // Scale
@@ -32,7 +47,7 @@ mesh.scale.x = 2;
 
 // Axes helper
 const axeshelper = new THREE.AxesHelper();
-scene.add(axeshelper);
+//scene.add(axeshelper);
 
 // Rotation
 mesh.rotation.y = 0.5;
