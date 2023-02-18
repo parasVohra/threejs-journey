@@ -12,6 +12,19 @@ const params = {
     },
 };
 
+// Texture
+const loadingManager = new THREE.LoadingManager();
+const textureLoader = new THREE.TextureLoader(loadingManager);
+const doorTexture = textureLoader.load("/textures/door.jpg");
+const alphaTexture = textureLoader.load("/textures/alpha.jpg");
+const heightTexture = textureLoader.load("/textures/height.jpg");
+const normalTexture = textureLoader.load("/textures/normal.jpg");
+const metalnessTexture = textureLoader.load("/textures/metalness.jpg");
+const roughnessTexture = textureLoader.load("/textures/roughness.jpg");
+const ambientOcclusionTexture = textureLoader.load(
+    "/textures/ambientOcclusion.jpg"
+);
+
 // Cursor
 const cursor = {
     x: 0,
@@ -32,7 +45,7 @@ const scene = new THREE.Scene();
  * Objects
  */
 const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial({ color: params.color });
+const material = new THREE.MeshBasicMaterial({ map: ambientOcclusionTexture });
 const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
 
